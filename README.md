@@ -2,6 +2,7 @@
 
 See also :
 
+- [How to create an NFS share in Azure](https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal)
 - [Understanding persistent storage](https://docs.openshift.com/aro/4/storage/understanding-persistent-storage.html#types-of-persistent-volumes_understanding-persistent-storage)
 - [Persistent storage using Azure File](https://docs.openshift.com/aro/4/storage/persistent_storage/persistent-storage-azure-file.html)
 - [Azure File CSI Driver for Kubernetes](https://github.com/kubernetes-sigs/azurefile-csi-driver)
@@ -153,6 +154,8 @@ spec:
   volumeMode: Filesystem
 EOF
 ```
+
+The minimum size for a NFS file share is 100GB due to the requirement on Premium storage in the Azure storage account. If you specify less that 100GB the volume will be created in Azure as a 100GB volume. Anything greater than 100GB will be created as configured.
 
 The PV that is created from the claim has the storage account information stored in the *volumeHandle* field. It will be in the format **resource-group#storage-account#file-share-name**. 
 ```yaml
